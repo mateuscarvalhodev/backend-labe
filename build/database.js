@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.products = exports.users = void 0;
+exports.searchProductByName = exports.createProducts = exports.getAllProducts = exports.getAllUsers = exports.createUser = exports.products = exports.users = void 0;
 exports.users = [
     {
         id: 'u001',
@@ -33,3 +33,38 @@ exports.products = [
         imageUrl: 'https://picsum.photos/seed/Monitor%20gamer/400',
     }
 ];
+const createUser = (id, name, email, password) => {
+    exports.users.push({
+        id,
+        email,
+        name,
+        password,
+        createdAt: new Date().toISOString(),
+    });
+    return 'cadastro realizado com sucesso';
+};
+exports.createUser = createUser;
+const getAllUsers = () => {
+    return exports.users;
+};
+exports.getAllUsers = getAllUsers;
+const getAllProducts = () => {
+    return exports.products;
+};
+exports.getAllProducts = getAllProducts;
+const createProducts = (price, id, name, description, imageUrl) => {
+    exports.products.push({
+        id,
+        name,
+        description,
+        imageUrl,
+        price,
+    });
+    return 'produto criado com sucesso';
+};
+exports.createProducts = createProducts;
+const searchProductByName = (name) => {
+    const productFiltered = exports.products.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
+    return productFiltered;
+};
+exports.searchProductByName = searchProductByName;
