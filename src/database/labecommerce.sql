@@ -62,8 +62,8 @@ VALUES (
         'Calça jeans azul de corte reto',
         'https://exemplo.com/calca_jeans.jpg'
     ), (
-        'p003',
-        'Tênis Esportivo',
+        'urcp003',
+        rod 'Tênis Esportivo',
         89.99,
         'Tênis para atividades físicas',
         'https://exemplo.com/tenis_esportivo.jpg'
@@ -147,3 +147,55 @@ SELECT
 FROM PURCHASES
     INNER JOIN USERS ON PURCHASES.buyer = USERS.id
 WHERE PURCHASES.id = 'purc001';
+
+CREATE TABLE
+    PURCHASES_PRODUCTS (
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES PURCHASES (id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES PRODUCTS (id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
+
+INSERT INTO
+    PURCHASES_PRODUCTS (
+        purchase_id,
+        product_id,
+        quantity
+    )
+VALUES ('purc001', 'p003', 2);
+
+INSERT INTO
+    PURCHASES_PRODUCTS (
+        purchase_id,
+        product_id,
+        quantity
+    )
+VALUES ('purc002', 'p001', 1);
+
+INSERT INTO
+    PURCHASES_PRODUCTS (
+        purchase_id,
+        product_id,
+        quantity
+    )
+VALUES ('purc003', 'p002', 3);
+
+SELECT
+    PURCHASES_PRODUCTS.purchase_id,
+    PURCHASES_PRODUCTS.product_id,
+    PURCHASES_PRODUCTS.quantity,
+    PURCHASES.id,
+    PURCHASES.buyer,
+    PURCHASES.total_price,
+    PURCHASES.created_at, 
+    PRODUCTS.id,
+    PRODUCTS.name,
+    PRODUCTS.price,
+    PRODUCTS.description,
+    PRODUCTS.image_url,
+FROM PURCHASES_PRODUCTS
+    INNER JOIN PURCHASES ON PURCHASES_PRODUCTS.purchase_id = PURCHASES.id
+    INNER JOIN PRODUCTS ON PURCHASES_PRODUCTS.product_id = PRODUCTS.id;
+
+DROP TABLE "PURCHASES_PRODUCTS";
