@@ -11,8 +11,7 @@ CREATE TABLE
 
 INSERT INTO
     USERS (id, name, email, password)
-VALUES
-(
+VALUES (
         'u001',
         'mateus',
         'mateus@gmail.com',
@@ -29,48 +28,92 @@ VALUES
         'farofaDePeixe'
     );
 
-    SELECT * FROM USERS;
+SELECT * FROM USERS;
 
-    CREATE TABLE PRODUCTS (
-    id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    name TEXT NOT NULL,
-    price REAL NOT NULL,
-    description TEXT NOT NULL,
-    image_url TEXT NOT NULL
-);
+CREATE TABLE
+    PRODUCTS (
+        id TEXT PRIMARY KEY UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        price REAL NOT NULL,
+        description TEXT NOT NULL,
+        image_url TEXT NOT NULL
+    );
+
 DROP TABLE PRODUCTS;
-INSERT INTO PRODUCTS (id, name, price, description, image_url)
-VALUES
-(
-    'p001',
-    'Camiseta Branca',
-    29.99,
-    'Camiseta branca de algodão',
-    'https://exemplo.com/camiseta_branca.jpg'
-), (
-    'p002',
-    'Calça Jeans',
-    59.99,
-    'Calça jeans azul de corte reto',
-    'https://exemplo.com/calca_jeans.jpg'
-), (
-    'p003',
-    'Tênis Esportivo',
-    89.99,
-    'Tênis para atividades físicas',
-    'https://exemplo.com/tenis_esportivo.jpg'
-), (
-    'p004',
-    'Bolsa de Couro',
-    129.99,
-    'Bolsa de couro marrom com alças ajustáveis',
-    'https://exemplo.com/bolsa_de_couro.jpg'
-), (
-    'p005',
-    'Relógio de Pulso',
-    199.99,
-    'Relógio de pulso analógico com pulseira de metal',
-    'https://exemplo.com/relogio_de_pulso.jpg'
-);
+
+INSERT INTO
+    PRODUCTS (
+        id,
+        name,
+        price,
+        description,
+        image_url
+    )
+VALUES (
+        'p001',
+        'Camiseta Branca',
+        29.99,
+        'Camiseta branca de algodão',
+        'https://exemplo.com/camiseta_branca.jpg'
+    ), (
+        'p002',
+        'Calça Jeans',
+        59.99,
+        'Calça jeans azul de corte reto',
+        'https://exemplo.com/calca_jeans.jpg'
+    ), (
+        'p003',
+        'Tênis Esportivo',
+        89.99,
+        'Tênis para atividades físicas',
+        'https://exemplo.com/tenis_esportivo.jpg'
+    ), (
+        'p004',
+        'Bolsa de Couro',
+        129.99,
+        'Bolsa de couro marrom com alças ajustáveis',
+        'https://exemplo.com/bolsa_de_couro.jpg'
+    ), (
+        'p005',
+        'Relógio de Pulso',
+        199.99,
+        'Relógio de pulso analógico com pulseira de metal',
+        'https://exemplo.com/relogio_de_pulso.jpg'
+    );
 
 SELECT * FROM PRODUCTS;
+
+SELECT * FROM PRODUCTS WHERE name LIKE '%Jeans%';
+
+INSERT INTO
+    USERS (id, name, email, password)
+VALUES (
+        'u004',
+        'Silva',
+        'silva@gmail.com',
+        'picanhaComTapioca'
+    );
+
+INSERT INTO
+    PRODUCTS (
+        id,
+        name,
+        price,
+        description,
+        image_url
+    )
+VALUES (
+        'p007',
+        'Camiseta Preta',
+        39.99,
+        'Camiseta preta de algodão',
+        'https://exemplo.com/camiseta_preta.jpg'
+    );
+
+DELETE FROM USERS WHERE id = 'u004';
+
+DELETE FROM PRODUCTS WHERE id = 'p002';
+
+UPDATE PRODUCTS 
+SET id = 'p008', name = 'Camiseta Roxa', description = 'Camiseta Roxa', image_url = 'https://exemplo.com/camiseta_roxa.jpg'
+WHERE id = 'p007'
