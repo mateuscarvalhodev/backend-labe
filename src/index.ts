@@ -51,3 +51,31 @@ api.post('/products', (req: Request, res: Response) => {
   }
   res.status(400).send('produto deu ruim');
 });
+
+api.delete('/users/:id', (req:Request, res:Response) => {
+  const id = req.params.id as string;
+  console.log(id);
+  if(!id) {
+    res.status(400).send('Insira o ID do usuário');
+  }
+  res.status(200).send('Usuario deletado com sucesso');  
+});
+
+api.delete('/products/:id', (req:Request, res:Response) => {
+  const id = req.params.id as string;
+  if(!id) {
+    res.status(400).send('Insira o ID do produto');
+  }
+  res.status(200).send('Product apagado');
+});
+
+api.put('/products/:id', (req:Request, res:Response) => {
+  const idToEdit = req.params.id as string;
+  const id = req.body.id as string;
+  const price = req.body.price as number;
+  const name = req.body.name as string;
+  const url = req.body.imageUrl as string;
+  const description = req.body.description as string;
+
+  res.status(200).send('usuário alterado com sucesso');
+})
