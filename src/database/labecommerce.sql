@@ -114,6 +114,36 @@ DELETE FROM USERS WHERE id = 'u004';
 
 DELETE FROM PRODUCTS WHERE id = 'p002';
 
-UPDATE PRODUCTS 
-SET id = 'p008', name = 'Camiseta Roxa', description = 'Camiseta Roxa', image_url = 'https://exemplo.com/camiseta_roxa.jpg'
-WHERE id = 'p007'
+UPDATE PRODUCTS
+SET
+    id = 'p008',
+    name = 'Camiseta Roxa',
+    description = 'Camiseta Roxa',
+    image_url = 'https://exemplo.com/camiseta_roxa.jpg'
+WHERE id = 'p007';
+
+CREATE TABLE
+    PURCHASES (
+        id TEXT PRIMARY KEY UNIQUE NOT NULL,
+        buyer TEXT NOT NULL,
+        total_price REAL NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (buyer) REFERENCES USERS(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
+
+INSERT INTO
+    PURCHASES (id, buyer, total_price)
+VALUES ('purc001', 'u001', 80), ('purc002', 'u002', 72);
+
+SELECT * FROM PURCHASES;
+
+SELECT
+    PURCHASES.id,
+    PURCHASES.buyer,
+    USERS.name,
+    USERS.email,
+    PURCHASES.total_price,
+    PURCHASES.created_at
+FROM PURCHASES
+    INNER JOIN USERS ON PURCHASES.buyer = USERS.id
+WHERE PURCHASES.id = 'purc001';
